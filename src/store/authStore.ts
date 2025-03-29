@@ -1,22 +1,14 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
+import { apiClient } from '../api/client';
+import { getToken, setToken, removeToken } from '../utils/token';
+import type { User, AuthResponse } from '../types';
 
-interface User {
-  id: string;
-  name: string;
-  email: string;
-  student_id: string;
-  credit_score: number;
-  avatar_url?: string;
-  phone_number?: string;
-  major?: string;
-  grade?: string;
-  role: 'user' | 'admin';
-  bio?: string;
-  last_login?: string;
-  is_disabled?: boolean;
-  created_at: string;
-}
+// 用于跟踪全局的请求状态
+const requestState = {
+  lastGetUserRequest: 0,
+  userRequestInProgress: false
+};
 
 interface AuthState {
   user: User | null;
@@ -42,214 +34,240 @@ interface AuthState {
   
   // 重置错误状态
   resetError: () => void;
+  
+  // 初始化认证状态
+  initAuth: () => void;
 }
 
 const useAuthStore = create<AuthState>()(
   persist(
     (set, get) => ({
       user: null,
-      token: null,
-      isAuthenticated: false,
+      token: getToken(), // 初始化时从本地存储获取token
+      isAuthenticated: !!getToken(), // 基于token存在性判断认证状态
       loading: false,
       error: null,
       
-      register: async (name, email, password, student_id) => {
-        try {
-          set({ loading: true, error: null });
+      // 初始化认证状态
+      initAuth: () => {
+        const token = getToken();
+        if (token) {
+          console.log('发现存储的token，恢复认证状态');
+          set({ token, isAuthenticated: true });
           
-          const response = await fetch('http://localhost:3000/api/auth/register', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ name, email, password, student_id })
+          // 如果用户信息为空且没有正在进行的请求，获取用户信息
+          const { user } = get();
+          if (!user && !requestState.userRequestInProgress) {
+            get().getCurrentUser().catch(err => {
+              console.error('初始化认证状态失败:', err);
+              removeToken();
+              set({ 
+                token: null, 
+                isAuthenticated: false, 
+                user: null 
+              });
+            });
+          }
+        } else {
+          console.log('未找到存储的token，用户未认证');
+          set({ token: null, isAuthenticated: false, user: null });
+        }
+      },
+      
+      register: async (name, email, password, student_id) => {
+        set({ loading: true, error: null });
+        try {
+          const response = await apiClient.post('/auth/register', {
+            name,
+            email, 
+            password,
+            student_id
           });
           
-          const data = await response.json();
+          // 提取并存储token和用户信息
+          const { token, user } = response;
           
-          if (!response.ok) {
-            throw new Error(data.message || '注册失败');
+          if (token) {
+            setToken(token);
+            
+            set({
+              token,
+              user,
+              isAuthenticated: true,
+              loading: false,
+              error: null
+            });
+            
+            return true;
+          } else {
+            throw new Error('注册成功但未返回有效token');
           }
+        } catch (error: any) {
+          const errorMessage = error.message || '注册失败，请稍后再试';
+          console.error('注册错误:', errorMessage);
           
           set({
-            user: {
-              id: data.id,
-              name: data.name,
-              email: data.email,
-              student_id: data.student_id,
-              credit_score: data.credit_score,
-              role: data.role || 'user',
-              avatar_url: data.avatar_url,
-              created_at: data.created_at
-            },
-            token: data.token,
-            isAuthenticated: true,
-            loading: false
+            loading: false,
+            error: errorMessage,
+            token: null,
+            isAuthenticated: false
           });
           
-          // 存储token到localStorage
-          localStorage.setItem('token', data.token);
-          
-          return true;
-        } catch (error) {
-          console.error('注册失败:', error);
-          set({ 
-            loading: false, 
-            error: error instanceof Error ? error.message : '注册失败' 
-          });
           return false;
         }
       },
       
       login: async (email, password) => {
+        set({ loading: true, error: null });
+        
         try {
-          set({ loading: true, error: null });
-          
-          const response = await fetch('http://localhost:3000/api/auth/login', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ email, password })
+          console.log(`尝试登录用户: ${email}`);
+          const response = await apiClient.post('/auth/login', { 
+            email, 
+            password 
           });
           
-          const data = await response.json();
+          console.log('登录响应:', response);
           
-          if (!response.ok) {
-            throw new Error(data.message || '登录失败');
+          // 检查响应中是否包含token和user
+          if (!response.token || !response.user) {
+            throw new Error('登录成功但服务器响应格式不正确');
           }
           
+          const { token, user } = response;
+          
+          // 保存token到localStorage
+          setToken(token);
+          
           set({
-            user: {
-              id: data.id,
-              name: data.name,
-              email: data.email,
-              student_id: data.student_id,
-              credit_score: data.credit_score,
-              role: data.role || 'user',
-              avatar_url: data.avatar_url,
-              phone_number: data.phone_number,
-              major: data.major,
-              grade: data.grade,
-              bio: data.bio,
-              created_at: data.created_at
-            },
-            token: data.token,
+            token,
+            user,
             isAuthenticated: true,
-            loading: false
+            loading: false,
+            error: null
           });
           
-          // 存储token到localStorage
-          localStorage.setItem('token', data.token);
-          
+          console.log('用户登录成功:', user.name);
           return true;
-        } catch (error) {
-          console.error('登录失败:', error);
-          set({ 
-            loading: false, 
-            error: error instanceof Error ? error.message : '登录失败' 
+        } catch (error: any) {
+          const errorMessage = error.message || '登录失败，请检查邮箱和密码';
+          console.error('登录错误:', errorMessage);
+          
+          // 清除任何可能存在的无效token
+          removeToken();
+          
+          set({
+            loading: false,
+            error: errorMessage,
+            token: null,
+            user: null,
+            isAuthenticated: false
           });
+          
           return false;
         }
       },
       
       getCurrentUser: async () => {
+        const { token, user } = get();
+        
+        // 如果没有token，不执行请求
+        if (!token) {
+          console.log('无token，跳过获取用户信息');
+          set({ user: null, isAuthenticated: false });
+          return;
+        }
+        
+        // 如果已经有用户信息，不执行请求
+        if (user) {
+          console.log('已有用户信息，跳过获取');
+          return;
+        }
+        
+        // 如果已有请求在进行中，不重复请求
+        if (requestState.userRequestInProgress) {
+          console.log('已有getCurrentUser请求在进行中，跳过');
+          return;
+        }
+        
+        // 检查是否频繁请求
+        const now = Date.now();
+        const timeSinceLastRequest = now - requestState.lastGetUserRequest;
+        
+        if (timeSinceLastRequest < 5000 && requestState.lastGetUserRequest > 0) {  // 5秒内的重复请求将被跳过
+          console.log(`距离上次请求用户信息仅${timeSinceLastRequest}ms，跳过请求`);
+          return;
+        }
+        
+        // 更新请求状态
+        requestState.lastGetUserRequest = now;
+        requestState.userRequestInProgress = true;
+        
+        set({ loading: true });
+        
         try {
-          const token = localStorage.getItem('token');
+          // 获取用户详细信息
+          console.log('获取当前用户信息...');
+          const userData = await apiClient.get('/auth/me');
           
-          if (!token) {
-            throw new Error('未登录');
-          }
-          
-          set({ loading: true, error: null });
-          
-          const response = await fetch('http://localhost:3000/api/auth/me', {
-            headers: {
-              'Authorization': `Bearer ${token}`
-            }
-          });
-          
-          const data = await response.json();
-          
-          if (!response.ok) {
-            throw new Error(data.message || '获取用户信息失败');
+          if (!userData) {
+            throw new Error('获取用户信息失败');
           }
           
           set({
-            user: {
-              id: data.id,
-              name: data.name,
-              email: data.email,
-              student_id: data.student_id,
-              credit_score: data.credit_score,
-              role: data.role || 'user',
-              avatar_url: data.avatar_url,
-              phone_number: data.phone_number,
-              major: data.major,
-              grade: data.grade,
-              bio: data.bio,
-              created_at: data.created_at
-            },
-            token,
+            user: userData,
             isAuthenticated: true,
             loading: false
           });
-        } catch (error) {
+          
+          console.log('获取用户信息成功:', userData.name);
+        } catch (error: any) {
           console.error('获取用户信息失败:', error);
-          // 如果token无效，清除登录状态
-          if (error instanceof Error && (
-            error.message.includes('未登录') || 
-            error.message.includes('无效') || 
-            error.message.includes('过期')
+          
+          // 如果是401错误，清除token并重置认证状态
+          if (error.message && (
+            error.message.includes('401') || 
+            error.message.includes('未授权') || 
+            error.message.includes('token')
           )) {
-            get().logout();
+            console.log('Token无效，清除认证状态');
+            removeToken();
+            
+            set({
+              user: null,
+              token: null,
+              isAuthenticated: false,
+              loading: false,
+              error: '登录已过期，请重新登录'
+            });
+          } else {
+            set({
+              loading: false,
+              error: error.message || '获取用户信息失败'
+            });
           }
-          set({ 
-            loading: false, 
-            error: error instanceof Error ? error.message : '获取用户信息失败' 
-          });
+        } finally {
+          // 请求完成后重置状态
+          requestState.userRequestInProgress = false;
         }
       },
       
       updateProfile: async (userData) => {
+        set({ loading: true, error: null });
+        
         try {
-          const token = localStorage.getItem('token');
-          
-          if (!token) {
-            throw new Error('未登录');
-          }
-          
-          set({ loading: true, error: null });
-          
-          const response = await fetch('http://localhost:3000/api/auth/profile', {
-            method: 'PUT',
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${token}`
-            },
-            body: JSON.stringify(userData)
-          });
-          
-          const data = await response.json();
-          
-          if (!response.ok) {
-            throw new Error(data.message || '更新用户资料失败');
-          }
+          const updatedUser = await apiClient.put('/auth/profile', userData);
           
           set({
-            user: {
-              ...get().user,
-              ...data,
-            } as User,
+            user: updatedUser,
             loading: false
           });
           
           return true;
-        } catch (error) {
-          console.error('更新用户资料失败:', error);
-          set({ 
-            loading: false, 
-            error: error instanceof Error ? error.message : '更新用户资料失败' 
+        } catch (error: any) {
+          set({
+            loading: false,
+            error: error.message || '更新用户资料失败'
           });
           return false;
         }
@@ -257,13 +275,15 @@ const useAuthStore = create<AuthState>()(
       
       logout: () => {
         // 清除localStorage中的token
-        localStorage.removeItem('token');
+        removeToken();
         
         set({
           user: null,
           token: null,
           isAuthenticated: false
         });
+        
+        console.log('用户已登出');
       },
       
       resetError: () => {
@@ -272,6 +292,7 @@ const useAuthStore = create<AuthState>()(
     }),
     {
       name: 'auth-storage',
+      // 持久化token和认证状态
       partialize: (state) => ({ 
         token: state.token,
         isAuthenticated: state.isAuthenticated 
