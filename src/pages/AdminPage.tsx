@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Layout from '@/components/Layout';
 import { Button, Card, Alert, AlertTitle, AlertDescription } from '@/components/ui';
 import useAuthStore from '@/store/authStore';
 
@@ -112,93 +111,89 @@ const AdminPage = () => {
   
   if (!user || user.role !== 'admin') {
     return (
-      <Layout>
-        <div className="container mx-auto py-8">
-          <Alert variant="destructive">
-            <AlertTitle>访问受限</AlertTitle>
-            <AlertDescription>您没有权限访问管理员页面</AlertDescription>
-          </Alert>
-        </div>
-      </Layout>
+      <div className="container mx-auto py-8">
+        <Alert variant="destructive">
+          <AlertTitle>访问受限</AlertTitle>
+          <AlertDescription>您没有权限访问管理员页面</AlertDescription>
+        </Alert>
+      </div>
     );
   }
   
   return (
-    <Layout>
-      <div className="container mx-auto py-8">
-        <h1 className="text-2xl font-bold mb-6">用户管理</h1>
-        
-        {error && (
-          <Alert variant="destructive" className="mb-6">
-            <AlertTitle>错误</AlertTitle>
-            <AlertDescription>{error}</AlertDescription>
-          </Alert>
-        )}
-        
-        {loading ? (
-          <div className="flex justify-center py-8">
-            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
-          </div>
-        ) : (
-          <div className="grid gap-6">
-            {users.map(user => (
-              <Card key={user.id} className="p-6">
-                <div className="flex flex-col md:flex-row md:items-center md:justify-between">
-                  <div>
-                    <h2 className="text-xl font-semibold">{user.name}</h2>
-                    <p className="text-gray-500 mt-1">{user.email}</p>
-                    <div className="mt-2 grid grid-cols-2 gap-x-4 gap-y-1 text-sm">
-                      <div>
-                        <span className="font-medium text-gray-700">学号: </span>
-                        <span>{user.student_id}</span>
-                      </div>
-                      <div>
-                        <span className="font-medium text-gray-700">信用分: </span>
-                        <span>{user.credit_score}</span>
-                      </div>
-                      <div>
-                        <span className="font-medium text-gray-700">角色: </span>
-                        <span>{user.role === 'admin' ? '管理员' : '普通用户'}</span>
-                      </div>
-                      <div>
-                        <span className="font-medium text-gray-700">状态: </span>
-                        <span className={user.is_disabled ? 'text-red-500' : 'text-green-500'}>
-                          {user.is_disabled ? '已禁用' : '正常'}
-                        </span>
-                      </div>
-                      <div>
-                        <span className="font-medium text-gray-700">注册时间: </span>
-                        <span>{formatDate(user.created_at)}</span>
-                      </div>
-                      <div>
-                        <span className="font-medium text-gray-700">最后登录: </span>
-                        <span>{formatDate(user.last_login)}</span>
-                      </div>
+    <div className="container mx-auto py-8">
+      <h1 className="text-2xl font-bold mb-6">用户管理</h1>
+      
+      {error && (
+        <Alert variant="destructive" className="mb-6">
+          <AlertTitle>错误</AlertTitle>
+          <AlertDescription>{error}</AlertDescription>
+        </Alert>
+      )}
+      
+      {loading ? (
+        <div className="flex justify-center py-8">
+          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
+        </div>
+      ) : (
+        <div className="grid gap-6">
+          {users.map(user => (
+            <Card key={user.id} className="p-6">
+              <div className="flex flex-col md:flex-row md:items-center md:justify-between">
+                <div>
+                  <h2 className="text-xl font-semibold">{user.name}</h2>
+                  <p className="text-gray-500 mt-1">{user.email}</p>
+                  <div className="mt-2 grid grid-cols-2 gap-x-4 gap-y-1 text-sm">
+                    <div>
+                      <span className="font-medium text-gray-700">学号: </span>
+                      <span>{user.student_id}</span>
+                    </div>
+                    <div>
+                      <span className="font-medium text-gray-700">信用分: </span>
+                      <span>{user.credit_score}</span>
+                    </div>
+                    <div>
+                      <span className="font-medium text-gray-700">角色: </span>
+                      <span>{user.role === 'admin' ? '管理员' : '普通用户'}</span>
+                    </div>
+                    <div>
+                      <span className="font-medium text-gray-700">状态: </span>
+                      <span className={user.is_disabled ? 'text-red-500' : 'text-green-500'}>
+                        {user.is_disabled ? '已禁用' : '正常'}
+                      </span>
+                    </div>
+                    <div>
+                      <span className="font-medium text-gray-700">注册时间: </span>
+                      <span>{formatDate(user.created_at)}</span>
+                    </div>
+                    <div>
+                      <span className="font-medium text-gray-700">最后登录: </span>
+                      <span>{formatDate(user.last_login)}</span>
                     </div>
                   </div>
-                  
-                  <div className="mt-4 md:mt-0 flex flex-col gap-2">
-                    <Button 
-                      variant={user.is_disabled ? "outline" : "destructive"}
-                      onClick={() => toggleUserStatus(user.id, !!user.is_disabled)}
-                      disabled={loading}
-                    >
-                      {user.is_disabled ? '启用账号' : '禁用账号'}
-                    </Button>
-                  </div>
                 </div>
-              </Card>
-            ))}
-            
-            {users.length === 0 && !loading && (
-              <div className="text-center py-8 text-gray-500">
-                暂无用户数据
+                
+                <div className="mt-4 md:mt-0 flex flex-col gap-2">
+                  <Button 
+                    variant={user.is_disabled ? "outline" : "destructive"}
+                    onClick={() => toggleUserStatus(user.id, !!user.is_disabled)}
+                    disabled={loading}
+                  >
+                    {user.is_disabled ? '启用账号' : '禁用账号'}
+                  </Button>
+                </div>
               </div>
-            )}
-          </div>
-        )}
-      </div>
-    </Layout>
+            </Card>
+          ))}
+          
+          {users.length === 0 && !loading && (
+            <div className="text-center py-8 text-gray-500">
+              暂无用户数据
+            </div>
+          )}
+        </div>
+      )}
+    </div>
   );
 };
 
