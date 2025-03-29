@@ -7,6 +7,7 @@ import HomePage from './pages/HomePage';
 import RoomListPage from './pages/RoomListPage';
 import RoomDetailPage from './pages/RoomDetailPage';
 import ProfilePage from './pages/ProfilePage';
+import AdminPage from './pages/AdminPage';
 import ReservationPage from './pages/ReservationPage';
 import NotFoundPage from './pages/NotFoundPage';
 import ProtectedRoute from './components/ProtectedRoute';
@@ -92,6 +93,16 @@ function App() {
             <ProtectedRoute>
               <Layout>
                 <ProfilePage />
+              </Layout>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin"
+          element={
+            <ProtectedRoute>
+              <Layout>
+                <AdminPage />
               </Layout>
             </ProtectedRoute>
           }

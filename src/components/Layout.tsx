@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { Calendar, LogOut, User, BookOpen, Home } from 'lucide-react';
+import { Calendar, LogOut, User, BookOpen, Home, Users } from 'lucide-react';
 import useAuthStore from '../store/authStore';
 
 interface LayoutProps {
@@ -40,6 +40,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
               {user && (
                 <div className="text-sm text-gray-700">
                   欢迎，<span className="font-medium">{user.name}</span>
+                  {user.role === 'admin' && <span className="ml-1 text-xs bg-indigo-100 text-indigo-800 py-0.5 px-1.5 rounded-full">管理员</span>}
                 </div>
               )}
             </div>
@@ -86,6 +87,22 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                 <User className="mr-3 h-5 w-5" />
                 个人信息
               </Link>
+              
+              {/* 管理员才能看到的菜单项 */}
+              {user && user.role === 'admin' && (
+                <Link
+                  to="/admin"
+                  className={`flex items-center px-4 py-3 rounded-md ${
+                    isActive('/admin') 
+                      ? 'bg-indigo-900 text-white' 
+                      : 'text-indigo-100 hover:bg-indigo-700'
+                  }`}
+                >
+                  <Users className="mr-3 h-5 w-5" />
+                  用户管理
+                </Link>
+              )}
+              
               <button
                 onClick={handleLogout}
                 className="w-full flex items-center px-4 py-3 rounded-md text-indigo-100 hover:bg-indigo-700"

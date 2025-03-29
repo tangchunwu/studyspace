@@ -7,6 +7,15 @@ interface User {
   email: string;
   student_id: string;
   credit_score: number;
+  avatar_url?: string;
+  phone_number?: string;
+  major?: string;
+  grade?: string;
+  role: 'user' | 'admin';
+  bio?: string;
+  last_login?: string;
+  is_disabled?: boolean;
+  created_at: string;
 }
 
 interface AuthState {
@@ -27,6 +36,9 @@ interface AuthState {
   
   // 用户登出
   logout: () => void;
+  
+  // 更新用户资料
+  updateProfile: (userData: Partial<User>) => Promise<boolean>;
   
   // 重置错误状态
   resetError: () => void;
@@ -65,7 +77,10 @@ const useAuthStore = create<AuthState>()(
               name: data.name,
               email: data.email,
               student_id: data.student_id,
-              credit_score: data.credit_score
+              credit_score: data.credit_score,
+              role: data.role || 'user',
+              avatar_url: data.avatar_url,
+              created_at: data.created_at
             },
             token: data.token,
             isAuthenticated: true,
@@ -110,7 +125,14 @@ const useAuthStore = create<AuthState>()(
               name: data.name,
               email: data.email,
               student_id: data.student_id,
-              credit_score: data.credit_score
+              credit_score: data.credit_score,
+              role: data.role || 'user',
+              avatar_url: data.avatar_url,
+              phone_number: data.phone_number,
+              major: data.major,
+              grade: data.grade,
+              bio: data.bio,
+              created_at: data.created_at
             },
             token: data.token,
             isAuthenticated: true,
@@ -159,7 +181,14 @@ const useAuthStore = create<AuthState>()(
               name: data.name,
               email: data.email,
               student_id: data.student_id,
-              credit_score: data.credit_score
+              credit_score: data.credit_score,
+              role: data.role || 'user',
+              avatar_url: data.avatar_url,
+              phone_number: data.phone_number,
+              major: data.major,
+              grade: data.grade,
+              bio: data.bio,
+              created_at: data.created_at
             },
             token,
             isAuthenticated: true,
@@ -179,6 +208,50 @@ const useAuthStore = create<AuthState>()(
             loading: false, 
             error: error instanceof Error ? error.message : '获取用户信息失败' 
           });
+        }
+      },
+      
+      updateProfile: async (userData) => {
+        try {
+          const token = localStorage.getItem('token');
+          
+          if (!token) {
+            throw new Error('未登录');
+          }
+          
+          set({ loading: true, error: null });
+          
+          const response = await fetch('http://localhost:3000/api/auth/profile', {
+            method: 'PUT',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify(userData)
+          });
+          
+          const data = await response.json();
+          
+          if (!response.ok) {
+            throw new Error(data.message || '更新用户资料失败');
+          }
+          
+          set({
+            user: {
+              ...get().user,
+              ...data,
+            } as User,
+            loading: false
+          });
+          
+          return true;
+        } catch (error) {
+          console.error('更新用户资料失败:', error);
+          set({ 
+            loading: false, 
+            error: error instanceof Error ? error.message : '更新用户资料失败' 
+          });
+          return false;
         }
       },
       

@@ -12,6 +12,7 @@ import { errorHandler } from './middlewares/error';
 import authRoutes from './routes/authRoutes';
 import roomRoutes from './routes/roomRoutes';
 import reservationRoutes from './routes/reservationRoutes';
+import userRoutes from './routes/userRoutes';
 
 // 加载环境变量
 dotenv.config();
@@ -41,6 +42,7 @@ app.get('/', (req, res) => {
 app.use('/api/auth', authRoutes);
 app.use('/api/rooms', roomRoutes);
 app.use('/api/reservations', reservationRoutes);
+app.use('/api/users', userRoutes);
 
 // 错误处理中间件
 app.use(errorHandler);

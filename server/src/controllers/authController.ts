@@ -40,6 +40,8 @@ export const registerUser = asyncHandler(async (req: Request, res: Response) => 
   user.password = password; // 密码会在实体的BeforeInsert钩子中自动哈希
   user.student_id = student_id;
   user.credit_score = 100;
+  user.role = 'user';
+  user.last_login = new Date(); // 设置首次登录时间
 
   await userRepository.save(user);
 
@@ -49,6 +51,9 @@ export const registerUser = asyncHandler(async (req: Request, res: Response) => 
     email: user.email,
     student_id: user.student_id,
     credit_score: user.credit_score,
+    role: user.role,
+    avatar_url: user.avatar_url,
+    created_at: user.created_at,
     token: generateToken(user.id)
   });
 });
@@ -73,6 +78,12 @@ export const loginUser = asyncHandler(async (req: Request, res: Response) => {
     return;
   }
 
+  // 检查账号是否被禁用
+  if (user.is_disabled) {
+    res.status(401).json({ message: '您的账号已被禁用，请联系管理员' });
+    return;
+  }
+
   // 检查密码是否匹配
   const isMatch = await user.comparePassword(password);
   if (!isMatch) {
@@ -80,12 +91,23 @@ export const loginUser = asyncHandler(async (req: Request, res: Response) => {
     return;
   }
 
+  // 更新最后登录时间
+  user.last_login = new Date();
+  await userRepository.save(user);
+
   res.json({
     id: user.id,
     name: user.name,
     email: user.email,
     student_id: user.student_id,
     credit_score: user.credit_score,
+    role: user.role,
+    avatar_url: user.avatar_url,
+    phone_number: user.phone_number,
+    major: user.major,
+    grade: user.grade,
+    bio: user.bio,
+    created_at: user.created_at,
     token: generateToken(user.id)
   });
 });
@@ -105,9 +127,67 @@ export const getUserProfile = asyncHandler(async (req: Request, res: Response) =
       email: user.email,
       student_id: user.student_id,
       credit_score: user.credit_score,
-      avatar_url: user.avatar_url
+      role: user.role,
+      avatar_url: user.avatar_url,
+      phone_number: user.phone_number,
+      major: user.major,
+      grade: user.grade,
+      bio: user.bio,
+      created_at: user.created_at
     });
   } else {
     res.status(404).json({ message: '用户不存在' });
   }
+});
+
+// @desc    更新用户资料
+// @route   PUT /api/auth/profile
+// @access  Private
+export const updateUserProfile = asyncHandler(async (req: Request, res: Response) => {
+  const userRepository = AppDataSource.getRepository(User);
+  
+  // 查找当前用户
+  const user = await userRepository.findOne({ where: { id: req.user.id } });
+  
+  if (!user) {
+    res.status(404).json({ message: '用户不存在' });
+    return;
+  }
+  
+  // 获取可更新字段
+  const { 
+    name, 
+    avatar_url, 
+    phone_number, 
+    major, 
+    grade, 
+    bio 
+  } = req.body;
+  
+  // 更新用户资料
+  if (name) user.name = name;
+  if (avatar_url) user.avatar_url = avatar_url;
+  if (phone_number) user.phone_number = phone_number;
+  if (major) user.major = major;
+  if (grade) user.grade = grade;
+  if (bio) user.bio = bio;
+  
+  // 保存更新
+  await userRepository.save(user);
+  
+  // 返回更新后的用户资料
+  res.json({
+    id: user.id,
+    name: user.name,
+    email: user.email,
+    student_id: user.student_id,
+    credit_score: user.credit_score,
+    role: user.role,
+    avatar_url: user.avatar_url,
+    phone_number: user.phone_number,
+    major: user.major,
+    grade: user.grade,
+    bio: user.bio,
+    created_at: user.created_at
+  });
 }); 

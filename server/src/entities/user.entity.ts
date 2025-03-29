@@ -33,6 +33,31 @@ export class User {
   @Column({ default: 100 })
   credit_score: number;
 
+  @Column({ nullable: true })
+  phone_number: string;
+
+  @Column({ nullable: true })
+  major: string;
+
+  @Column({ nullable: true })
+  grade: string;
+
+  @Column({ 
+    type: 'enum', 
+    enum: ['user', 'admin'],
+    default: 'user'
+  })
+  role: 'user' | 'admin';
+
+  @Column({ type: 'text', nullable: true })
+  bio: string;
+
+  @Column({ nullable: true })
+  last_login: Date;
+
+  @Column({ default: false })
+  is_disabled: boolean;
+
   @CreateDateColumn()
   created_at: Date;
 
