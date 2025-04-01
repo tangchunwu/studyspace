@@ -1,0 +1,143 @@
+/* 座位动画效果 */
+.seat-btn {
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.seat-btn:active {
+  transform: scale(0.95);
+}
+
+/* 座位选中时的脉动效果 */
+.seat-selected {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(79, 70, 229, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(79, 70, 229, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(79, 70, 229, 0);
+  }
+}
+
+.pulse-animation {
+  animation: pulse 2s infinite;
+}
+
+/* 座位悬停效果 */
+.seat-available:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* 座位点击波纹效果 */
+.seat-btn::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.5);
+  opacity: 0;
+  border-radius: 100%;
+  transform: scale(1, 1) translate(-50%, -50%);
+  transform-origin: 50% 50%;
+}
+
+.seat-btn:focus:not(:active)::after {
+  animation: ripple 1s ease-out;
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(0, 0) translate(-50%, -50%);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(20, 20) translate(-50%, -50%);
+    opacity: 0;
+  }
+}
+
+/* 座位图容器效果 */
+.seat-map-container {
+  perspective: 1000px;
+  opacity: 0;
+  animation: fadeIn 0.5s ease forwards;
+}
+
+.seat-map-inner {
+  transition: transform 0.5s ease;
+}
+
+.seat-map-container:hover .seat-map-inner {
+  transform: rotateX(5deg);
+}
+
+/* 座位行标签效果 */
+.row-label {
+  transition: all 0.3s ease;
+}
+
+.seat-row:hover .row-label {
+  background-color: #e0e7ff;
+  color: #4338ca;
+}
+
+/* 屏幕区域 */
+.screen {
+  position: relative;
+  height: 12px;
+  background: linear-gradient(to bottom, rgba(79, 70, 229, 0.7), rgba(79, 70, 229, 0.3));
+  border-radius: 50px;
+  width: 60%;
+  margin: 0 auto 30px;
+  box-shadow: 0 0 10px rgba(99, 102, 241, 0.5);
+}
+
+.screen::before {
+  content: '前方';
+  position: absolute;
+  top: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 14px;
+  color: #6366f1;
+  font-weight: 500;
+}
+
+/* 座位预约成功反馈 */
+@keyframes success {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.reservation-success {
+  animation: success 0.5s ease;
+}
+
+/* 为可用座位添加微妙的悬停效果 */
+.seat-btn:not(:disabled):hover {
+  transform: translateY(-3px) scale(1.05);
+  transition: all 0.3s ease;
+}
+
+/* 添加点击反馈 */
+.seat-btn:not(:disabled):active {
+  transform: translateY(0) scale(0.95);
+  transition: all 0.1s ease;
+} 

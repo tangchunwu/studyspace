@@ -1,0 +1,200 @@
+.reserve-page {
+  min-height: 100vh;
+  background-color: var(--ios-background);
+  padding-bottom: 120px;
+}
+
+.reserve-header {
+  padding: 20px;
+  background-color: var(--ios-secondary-background);
+  margin-bottom: 15px;
+  border-radius: 0 0 12px 12px;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.04);
+}
+
+.title {
+  margin-bottom: 5px;
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--ios-text-primary);
+}
+
+.subtitle {
+  font-size: 15px;
+  color: var(--ios-text-secondary);
+}
+
+/* 预约表单区域 */
+.reserve-form {
+  padding: 0 15px;
+}
+
+.form-card {
+  background-color: var(--ios-secondary-background);
+  border-radius: 12px;
+  margin-bottom: 15px;
+  overflow: hidden;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.04);
+}
+
+.card-header {
+  padding: 15px;
+  border-bottom: 1px solid rgba(120, 120, 128, 0.08);
+  display: flex;
+  align-items: center;
+}
+
+.card-title {
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--ios-text-primary);
+  margin-left: 5px;
+}
+
+.card-icon {
+  width: 20px;
+  height: 20px;
+  opacity: 0.8;
+}
+
+.card-content {
+  padding: 15px;
+}
+
+/* 选择器样式 */
+.form-item {
+  margin-bottom: 15px;
+}
+
+.form-item:last-child {
+  margin-bottom: 0;
+}
+
+.item-label {
+  font-size: 15px;
+  color: var(--ios-text-secondary);
+  margin-bottom: 8px;
+  display: block;
+}
+
+.item-value {
+  height: 44px;
+  width: 100%;
+  padding: 0 15px;
+  background-color: rgba(120, 120, 128, 0.08);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  color: var(--ios-text-primary);
+}
+
+.form-picker {
+  height: 44px;
+  line-height: 44px;
+  width: 100%;
+  background-color: rgba(120, 120, 128, 0.08);
+  border-radius: 10px;
+  padding: 0 15px;
+  font-size: 16px;
+  color: var(--ios-text-primary);
+}
+
+.form-picker-placeholder {
+  color: var(--ios-text-tertiary);
+}
+
+.time-slots {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -5px;
+}
+
+.time-slot {
+  margin: 5px;
+  padding: 8px 12px;
+  border-radius: 16px;
+  background-color: rgba(120, 120, 128, 0.08);
+  font-size: 14px;
+  color: var(--ios-text-secondary);
+  transition: all 0.2s ease;
+}
+
+.time-slot.selected {
+  background-color: var(--ios-blue);
+  color: #fff;
+}
+
+.time-slot.disabled {
+  opacity: 0.4;
+  color: var(--ios-text-tertiary);
+}
+
+/* 用户信息区域 */
+.user-name-input, .user-id-input {
+  width: 100%;
+  height: 44px;
+  padding: 0 15px;
+  border-radius: 10px;
+  background-color: rgba(120, 120, 128, 0.08);
+  font-size: 16px;
+}
+
+/* 底部提交按钮 */
+.submit-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 15px;
+  background-color: var(--ios-secondary-background);
+  box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.04);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 100;
+}
+
+.price-info {
+  font-size: 15px;
+  color: var(--ios-text-secondary);
+}
+
+.price {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--ios-text-primary);
+  margin-left: 5px;
+}
+
+.submit-button {
+  background-color: var(--ios-blue);
+  color: #fff;
+  border-radius: 10px;
+  padding: 12px 25px;
+  font-size: 16px;
+  font-weight: 500;
+  text-align: center;
+  transition: all 0.2s ease;
+}
+
+.submit-button:active {
+  opacity: 0.8;
+  transform: scale(0.98);
+}
+
+.submit-button.disabled {
+  background-color: rgba(120, 120, 128, 0.2);
+  color: var(--ios-text-tertiary);
+}
+
+/* 提示信息 */
+.notice {
+  margin-top: 20px;
+  padding: 15px;
+  background-color: rgba(255, 159, 10, 0.1);
+  border-radius: 12px;
+  color: var(--ios-orange);
+  font-size: 14px;
+  line-height: 1.4;
+} 

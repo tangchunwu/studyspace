@@ -1,0 +1,192 @@
+.room-list-page {
+  padding: 0 0 20px;
+  min-height: 100vh;
+  background-color: var(--ios-background);
+}
+
+/* iOS风格搜索框 */
+.search-bar {
+  padding: 15px;
+  margin: 10px 15px;
+  background-color: var(--ios-secondary-background);
+  border-radius: 12px;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.04);
+}
+
+.search-input {
+  width: 100%;
+  height: 36px;
+  background-color: rgba(142, 142, 147, 0.12);
+  border-radius: 10px;
+  padding: 0 15px;
+  font-size: 16px;
+}
+
+/* iOS风格筛选标签 */
+.filter-tags {
+  display: flex;
+  padding: 10px 15px;
+  margin: 0 15px 15px;
+  background-color: var(--ios-secondary-background);
+  border-radius: 12px;
+  overflow-x: auto;
+  white-space: nowrap;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.04);
+}
+
+.filter-tag {
+  display: inline-block;
+  padding: 8px 16px;
+  margin-right: 10px;
+  border-radius: 16px;
+  font-size: 14px;
+  font-weight: 500;
+  background-color: rgba(142, 142, 147, 0.12);
+  color: var(--ios-text-secondary);
+  transition: all 0.2s ease;
+}
+
+.filter-tag:active {
+  opacity: 0.8;
+  transform: scale(0.97);
+}
+
+.filter-tag.active {
+  background-color: var(--ios-blue);
+  color: #fff;
+}
+
+/* 自习室列表 */
+.room-list-scroll {
+  height: calc(100vh - 130px);
+}
+
+.room-list {
+  padding: 0 15px;
+}
+
+.room-card {
+  background-color: var(--ios-secondary-background);
+  border-radius: 12px;
+  margin-bottom: 15px;
+  overflow: hidden;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.04);
+  transition: all 0.2s ease;
+}
+
+.room-card:active {
+  transform: scale(0.98);
+  opacity: 0.9;
+}
+
+.room-image {
+  width: 100%;
+  height: 160px;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+.room-content {
+  padding: 15px;
+}
+
+.room-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.room-name {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--ios-text-primary);
+}
+
+.room-status {
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-weight: 500;
+}
+
+.status-available {
+  background-color: rgba(52, 199, 89, 0.12);
+  color: var(--ios-green);
+}
+
+.status-full {
+  background-color: rgba(255, 59, 48, 0.12);
+  color: var(--ios-red);
+}
+
+.room-location {
+  font-size: 14px;
+  color: var(--ios-text-secondary);
+  margin-bottom: 12px;
+  display: block;
+}
+
+.room-capacity {
+  margin-bottom: 15px;
+}
+
+.capacity-bar {
+  height: 6px;
+  background-color: rgba(120, 120, 128, 0.16);
+  border-radius: 3px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.capacity-progress {
+  height: 100%;
+  background-color: var(--ios-blue);
+  border-radius: 3px;
+}
+
+.capacity-text {
+  font-size: 12px;
+  color: var(--ios-text-tertiary);
+}
+
+.reserve-btn {
+  background-color: var(--ios-blue);
+  color: #fff;
+  text-align: center;
+  padding: 10px 0;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.reserve-btn:active {
+  opacity: 0.8;
+  transform: scale(0.98);
+}
+
+/* 加载和空状态 */
+.loading {
+  padding: 30px 0;
+  text-align: center;
+  color: var(--ios-text-tertiary);
+  font-size: 15px;
+}
+
+.empty-list {
+  padding: 60px 0;
+  text-align: center;
+  color: var(--ios-text-tertiary);
+  font-size: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.empty-icon {
+  width: 100px;
+  height: 100px;
+  margin-bottom: 20px;
+  opacity: 0.5;
+} 

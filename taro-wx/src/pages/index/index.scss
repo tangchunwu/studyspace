@@ -1,0 +1,200 @@
+.index {
+  padding: 0 0 40px;
+  background-color: var(--ios-background);
+}
+
+/* iOS风格轮播图 */
+.banner-swiper {
+  height: 350px;
+  margin: 0 16px;
+  margin-top: 16px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.banner-image {
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+}
+
+.banner-title {
+  position: absolute;
+  bottom: 30px;
+  left: 30px;
+  color: #fff;
+  font-size: 22px;
+  font-weight: 700;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* iOS风格功能卡片区域 */
+.feature-cards {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 20px 12px;
+  background-color: var(--ios-secondary-background);
+  margin: 16px;
+  border-radius: 12px;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.04);
+}
+
+.feature-card {
+  width: 25%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15px 0;
+  transition: all 0.2s ease;
+}
+
+.feature-card:active {
+  opacity: 0.7;
+  transform: scale(0.97);
+}
+
+.feature-icon {
+  width: 60px;
+  height: 60px;
+  margin-bottom: 10px;
+  border-radius: 15px;
+}
+
+.feature-title {
+  font-size: 14px;
+  color: var(--ios-text-primary);
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.feature-desc {
+  font-size: 12px;
+  color: var(--ios-text-tertiary);
+  text-align: center;
+  padding: 0 8px;
+}
+
+/* 热门自习室区域 */
+.section {
+  background-color: var(--ios-secondary-background);
+  padding: 20px;
+  margin: 0 16px 16px;
+  border-radius: 12px;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.04);
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.section-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--ios-text-primary);
+}
+
+.section-more {
+  font-size: 14px;
+  color: var(--ios-blue);
+  font-weight: 500;
+}
+
+.room-card {
+  background-color: var(--ios-tertiary-background);
+  border-radius: 10px;
+  padding: 16px;
+  margin-bottom: 12px;
+  transition: all 0.2s ease;
+}
+
+.room-card:active {
+  transform: scale(0.98);
+  opacity: 0.9;
+}
+
+.room-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.room-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--ios-text-primary);
+}
+
+.room-status {
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-weight: 500;
+}
+
+.status-available {
+  background-color: rgba(52, 199, 89, 0.12);
+  color: var(--ios-green);
+}
+
+.status-full {
+  background-color: rgba(255, 59, 48, 0.12);
+  color: var(--ios-red);
+}
+
+.room-capacity {
+  display: flex;
+  flex-direction: column;
+}
+
+.capacity-bar {
+  height: 6px;
+  background-color: rgba(120, 120, 128, 0.16);
+  border-radius: 3px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.capacity-progress {
+  height: 100%;
+  background-color: var(--ios-blue);
+  border-radius: 3px;
+}
+
+.capacity-text {
+  font-size: 12px;
+  color: var(--ios-text-tertiary);
+}
+
+/* 我的预约入口 */
+.my-bookings {
+  background-color: var(--ios-secondary-background);
+  padding: 16px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 16px;
+  border-radius: 12px;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.04);
+  transition: all 0.2s ease;
+}
+
+.my-bookings:active {
+  transform: scale(0.98);
+  opacity: 0.9;
+}
+
+.my-bookings-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--ios-text-primary);
+}
+
+.my-bookings-arrow {
+  color: var(--ios-text-tertiary);
+  font-weight: bold;
+} 

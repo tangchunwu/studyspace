@@ -1,0 +1,215 @@
+.reservation-page, .reservation-success {
+  min-height: 100vh;
+  background-color: #f7f8fa;
+  padding-bottom: 30px;
+}
+
+.loading {
+  padding: 40px 0;
+  text-align: center;
+  color: #999;
+}
+
+/* 预约确认页面样式 */
+.reservation-content {
+  padding: 15px;
+}
+
+.reservation-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.header-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+}
+
+.reservation-info {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 15px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.info-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.info-item:last-child {
+  margin-bottom: 0;
+}
+
+.info-label {
+  color: #666;
+  font-size: 14px;
+}
+
+.info-value {
+  color: #333;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.reservation-rules {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 15px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.rules-title {
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.rule-item {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 8px;
+  display: block;
+  line-height: 1.5;
+}
+
+.agreement-section {
+  display: flex;
+  align-items: center;
+  padding: 15px 0;
+}
+
+.agreement-switch {
+  transform: scale(0.8);
+  margin-right: 5px;
+}
+
+.agreement-text {
+  font-size: 14px;
+  color: #666;
+}
+
+.submit-section {
+  margin-top: 20px;
+}
+
+.submit-btn, .cancel-btn {
+  height: 44px;
+  line-height: 44px;
+  text-align: center;
+  border-radius: 22px;
+  font-size: 16px;
+  margin-bottom: 15px;
+}
+
+.submit-btn {
+  background-color: #4F46E5;
+  color: #fff;
+}
+
+.submit-btn[disabled] {
+  background-color: #ccc;
+  color: #fff;
+}
+
+.cancel-btn {
+  background-color: #f5f5f5;
+  color: #666;
+}
+
+/* 预约成功页面样式 */
+.reservation-success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 20px;
+}
+
+.success-icon {
+  width: 80px;
+  height: 80px;
+  border-radius: 40px;
+  background-color: #10B981;
+  color: #fff;
+  font-size: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.success-title {
+  font-size: 22px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.success-desc {
+  font-size: 16px;
+  color: #666;
+  margin-bottom: 30px;
+}
+
+.success-info {
+  width: 100%;
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 20px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.success-tips {
+  width: 100%;
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 30px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.tips-title {
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.tips-text {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 8px;
+  display: block;
+  line-height: 1.5;
+}
+
+.success-actions {
+  width: 100%;
+}
+
+.action-btn {
+  height: 44px;
+  line-height: 44px;
+  text-align: center;
+  border-radius: 22px;
+  font-size: 16px;
+  margin-bottom: 15px;
+}
+
+.primary-btn {
+  background-color: #4F46E5;
+  color: #fff;
+}
+
+.secondary-btn {
+  background-color: #f5f5f5;
+  color: #666;
+} 

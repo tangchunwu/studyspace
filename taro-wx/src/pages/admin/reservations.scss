@@ -1,0 +1,327 @@
+.reservations-page {
+  background-color: var(--ios-background);
+  min-height: 100vh;
+  padding-bottom: 20px;
+}
+
+/* 过滤区域 */
+.filter-section {
+  background-color: var(--ios-secondary-background);
+  padding: 15px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.04);
+}
+
+.search-bar {
+  margin-bottom: 10px;
+}
+
+.search-input {
+  width: 100%;
+  background-color: rgba(142, 142, 147, 0.12);
+  border-radius: 10px;
+  padding: 8px 15px;
+  font-size: 14px;
+}
+
+.filter-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.filter-option {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+}
+
+.option-label {
+  color: var(--ios-text-secondary);
+  margin-right: 10px;
+}
+
+.picker-value {
+  background-color: rgba(142, 142, 147, 0.12);
+  border-radius: 8px;
+  padding: 6px 12px;
+  color: var(--ios-text-primary);
+  flex: 1;
+}
+
+/* 批量操作区域 */
+.batch-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--ios-blue);
+  padding: 10px 15px;
+  color: white;
+}
+
+.selected-count {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.batch-button {
+  border-radius: 6px;
+  font-size: 12px;
+  padding: 4px 10px;
+  margin-left: 10px;
+  background-color: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: none;
+  line-height: 1.4;
+}
+
+.batch-button.cancel {
+  background-color: rgba(255, 59, 48, 0.3);
+}
+
+/* 预约列表 */
+.reservations-list {
+  padding: 15px;
+  padding-bottom: 40px;
+  height: calc(100vh - 140px);
+}
+
+.reservation-card {
+  background-color: var(--ios-secondary-background);
+  border-radius: 12px;
+  margin-bottom: 15px;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.04);
+  overflow: hidden;
+  display: flex;
+}
+
+.reservation-check {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 10px;
+}
+
+.reservation-content {
+  flex: 1;
+  padding: 15px;
+  padding-left: 5px;
+}
+
+.reservation-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.reservation-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--ios-text-primary);
+}
+
+.status-tag {
+  font-size: 12px;
+  padding: 3px 8px;
+  border-radius: 10px;
+  font-weight: 500;
+}
+
+.status-tag.waiting {
+  background-color: rgba(48, 114, 246, 0.1);
+  color: var(--ios-blue);
+}
+
+.status-tag.check-in {
+  background-color: rgba(255, 149, 0, 0.1);
+  color: var(--ios-orange);
+}
+
+.status-tag.checked {
+  background-color: rgba(52, 199, 89, 0.1);
+  color: var(--ios-green);
+}
+
+.status-tag.completed {
+  background-color: rgba(142, 142, 147, 0.1);
+  color: var(--ios-text-tertiary);
+}
+
+.status-tag.canceled {
+  background-color: rgba(255, 59, 48, 0.1);
+  color: var(--ios-red);
+}
+
+.reservation-details {
+  margin-bottom: 12px;
+}
+
+.detail-item {
+  display: flex;
+  margin-bottom: 6px;
+  font-size: 14px;
+}
+
+.detail-label {
+  color: var(--ios-text-tertiary);
+  width: 70px;
+}
+
+.detail-value {
+  color: var(--ios-text-secondary);
+  flex: 1;
+}
+
+.reservation-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.action-buttons {
+  display: flex;
+}
+
+.action-btn {
+  margin-left: 10px;
+  font-size: 13px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.action-btn.detail {
+  background-color: rgba(142, 142, 147, 0.1);
+  color: var(--ios-text-secondary);
+}
+
+.action-btn.checkin {
+  background-color: rgba(52, 199, 89, 0.1);
+  color: var(--ios-green);
+}
+
+.action-btn.cancel {
+  background-color: rgba(255, 59, 48, 0.1);
+  color: var(--ios-red);
+}
+
+/* 空状态和加载状态 */
+.loading-state, .empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 50px 0;
+  color: var(--ios-text-tertiary);
+  font-size: 14px;
+}
+
+/* 详情模态框 */
+.detail-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content {
+  width: 90%;
+  max-height: 80vh;
+  background-color: var(--ios-secondary-background);
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-header {
+  padding: 15px;
+  border-bottom: 1px solid rgba(142, 142, 147, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--ios-text-primary);
+}
+
+.close-btn {
+  font-size: 20px;
+  color: var(--ios-text-tertiary);
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 15px;
+}
+
+.close-btn:active {
+  background-color: rgba(142, 142, 147, 0.1);
+}
+
+.modal-body {
+  padding: 15px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.detail-row {
+  display: flex;
+  margin-bottom: 15px;
+}
+
+.detail-row .detail-label {
+  width: 80px;
+  color: var(--ios-text-tertiary);
+  font-size: 14px;
+}
+
+.detail-row .detail-value {
+  flex: 1;
+  color: var(--ios-text-primary);
+  font-size: 14px;
+}
+
+.modal-footer {
+  padding: 15px;
+  border-top: 1px solid rgba(142, 142, 147, 0.1);
+  display: flex;
+  justify-content: flex-end;
+}
+
+.modal-btn {
+  margin-left: 10px;
+  padding: 8px 15px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.modal-btn.close {
+  background-color: rgba(142, 142, 147, 0.1);
+  color: var(--ios-text-primary);
+}
+
+.modal-btn.checkin {
+  background-color: var(--ios-green);
+  color: white;
+}
+
+.modal-btn.cancel {
+  background-color: var(--ios-red);
+  color: white;
+} 

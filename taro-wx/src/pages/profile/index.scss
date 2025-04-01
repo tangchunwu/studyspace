@@ -1,0 +1,243 @@
+.profile-page {
+  background-color: #f7f8fa;
+  min-height: 100vh;
+  padding-bottom: 30px;
+}
+
+/* 用户信息区域 */
+.user-info-section {
+  background-color: #3072F6;
+  padding: 30px 20px;
+  color: #fff;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+}
+
+.avatar, .default-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 40px;
+  margin-right: 15px;
+  background-color: #fff;
+}
+
+.user-details {
+  flex: 1;
+}
+
+.nickname {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 5px;
+  display: block;
+}
+
+.user-id {
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+.admin-badge {
+  display: inline-block;
+  background-color: #ff9800;
+  color: #fff;
+  font-size: 12px;
+  padding: 2px 6px;
+  border-radius: 10px;
+  margin-top: 8px;
+}
+
+.login-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-prompt {
+  margin: 10px 0;
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+.login-btn {
+  margin-top: 5px;
+  background-color: #fff;
+  color: #3072F6;
+  border-radius: 20px;
+  font-size: 14px;
+  padding: 5px 20px;
+  font-weight: bold;
+}
+
+/* 我的预约区域 */
+.my-reservations {
+  background-color: #fff;
+  margin: 15px;
+  border-radius: 8px;
+  padding: 15px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.section-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+}
+
+.section-more {
+  font-size: 14px;
+  color: #3072F6;
+}
+
+.reservation-list {
+  
+}
+
+.reservation-card {
+  background-color: #f7f8fa;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 15px;
+}
+
+.reservation-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.room-name {
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+}
+
+.reservation-status {
+  font-size: 12px;
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+
+.status-checkin {
+  background-color: rgba(245, 158, 11, 0.1);
+  color: #F59E0B;
+}
+
+.status-upcoming {
+  background-color: rgba(79, 70, 229, 0.1);
+  color: #4F46E5;
+}
+
+.status-completed {
+  background-color: rgba(16, 185, 129, 0.1);
+  color: #10B981;
+}
+
+.reservation-info {
+  margin-bottom: 15px;
+}
+
+.info-item {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 5px;
+  display: block;
+}
+
+.reservation-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.action-btn {
+  margin-left: 10px;
+  font-size: 12px;
+  padding: 4px 12px;
+  height: 30px;
+  line-height: 22px;
+  border-radius: 15px;
+  text-align: center;
+}
+
+.checkin-btn {
+  background-color: #10B981;
+  color: #fff;
+}
+
+.cancel-btn {
+  background-color: #EF4444;
+  color: #fff;
+}
+
+.detail-btn {
+  background-color: #3072F6;
+  color: #fff;
+}
+
+.empty-reservations, .login-required {
+  padding: 30px 0;
+  text-align: center;
+  color: #999;
+}
+
+.to-reserve-btn {
+  margin-top: 15px;
+  background-color: #3072F6;
+  color: #fff;
+  font-size: 14px;
+  border-radius: 20px;
+  padding: 5px 20px;
+  display: inline-block;
+}
+
+/* 设置区域 */
+.settings-section {
+  background-color: #fff;
+  margin: 15px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.setting-item {
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.setting-item:last-child {
+  border-bottom: none;
+}
+
+.setting-name {
+  font-size: 15px;
+  color: #333;
+}
+
+.admin-setting {
+  color: #ff9800;
+  font-weight: 500;
+}
+
+.setting-arrow {
+  color: #ccc;
+  font-weight: bold;
+}
+
+.logout {
+  color: #EF4444;
+} 

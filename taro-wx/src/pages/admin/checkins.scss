@@ -1,0 +1,202 @@
+.checkins-page {
+  background-color: var(--ios-background);
+  min-height: 100vh;
+  padding-bottom: 30px;
+}
+
+/* 顶部筛选区域 */
+.filter-section {image.png
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background-color: var(--ios-background);
+  padding: 15px 15px 10px;
+}
+
+.search-bar {
+  margin-bottom: 10px;
+}
+
+.search-input {
+  width: 100%;
+  height: 44px;
+  background-color: var(--ios-secondary-background);
+  border-radius: 10px;
+  padding: 0 15px;
+  font-size: 16px;
+}
+
+.filter-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.filter-item {
+  flex: 1;
+  height: 40px;
+  background-color: var(--ios-secondary-background);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+}
+
+.date-filter {
+  margin-right: 10px;
+}
+
+.filter-label {
+  color: var(--ios-text-secondary);
+  font-size: 14px;
+  margin-right: 5px;
+}
+
+.filter-value {
+  color: var(--ios-text-primary);
+  font-size: 14px;
+  flex: 1;
+}
+
+/* 签到记录列表 */
+.checkins-list {
+  height: calc(100vh - 115px);
+  padding: 10px 15px;
+}
+
+.checkin-card {
+  background-color: var(--ios-secondary-background);
+  border-radius: 12px;
+  padding: 15px;
+  margin-bottom: 15px;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.04);
+}
+
+.checkin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--ios-text-primary);
+  margin-bottom: 4px;
+}
+
+.user-id {
+  font-size: 14px;
+  color: var(--ios-text-secondary);
+}
+
+.status-tag {
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 10px;
+}
+
+.status-tag.normal {
+  background-color: rgba(52, 199, 89, 0.1);
+  color: var(--ios-green);
+}
+
+.status-tag.late {
+  background-color: rgba(255, 149, 0, 0.1);
+  color: var(--ios-orange);
+}
+
+.status-tag.rejected {
+  background-color: rgba(255, 59, 48, 0.1);
+  color: var(--ios-red);
+}
+
+.status-tag.pending {
+  background-color: rgba(142, 142, 147, 0.1);
+  color: var(--ios-gray);
+}
+
+.checkin-details {
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(142, 142, 147, 0.1);
+}
+
+.detail-item {
+  display: flex;
+  margin-bottom: 8px;
+}
+
+.detail-item:last-child {
+  margin-bottom: 0;
+}
+
+.detail-label {
+  width: 70px;
+  color: var(--ios-text-secondary);
+  font-size: 14px;
+}
+
+.detail-value {
+  flex: 1;
+  color: var(--ios-text-primary);
+  font-size: 14px;
+}
+
+.checkin-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 12px;
+}
+
+.action-btn {
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  margin-left: 10px;
+  text-align: center;
+}
+
+.approve-btn {
+  background-color: var(--ios-green);
+  color: white;
+}
+
+.late-btn {
+  background-color: var(--ios-orange);
+  color: white;
+}
+
+.reject-btn {
+  background-color: var(--ios-red);
+  color: white;
+}
+
+/* 加载和空状态 */
+.loading-state {
+  text-align: center;
+  padding: 40px 0;
+  color: var(--ios-text-tertiary);
+}
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 100px 0;
+}
+
+.empty-icon {
+  font-size: 48px;
+  margin-bottom: 15px;
+}
+
+.empty-text {
+  font-size: 14px;
+  color: var(--ios-text-tertiary);
+} 

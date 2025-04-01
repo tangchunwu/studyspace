@@ -1,0 +1,188 @@
+.admin-home {
+  background-color: var(--ios-background);
+  min-height: 100vh;
+  padding-bottom: 40px;
+}
+
+/* 顶部标题区域 */
+.admin-header {
+  background-color: var(--ios-blue);
+  padding: 30px 20px;
+  color: #fff;
+}
+
+.admin-title {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.admin-subtitle {
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+/* 统计数据区域 */
+.stats-section {
+  margin: 20px 15px;
+  background-color: var(--ios-secondary-background);
+  border-radius: 12px;
+  padding: 15px;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.04);
+}
+
+.section-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--ios-text-primary);
+  margin-bottom: 15px;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+}
+
+.stat-card {
+  background-color: var(--ios-tertiary-background);
+  border-radius: 10px;
+  padding: 15px;
+  text-align: center;
+}
+
+.stat-card.highlight {
+  background-color: #fef8ed;
+}
+
+.stat-number {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--ios-text-primary);
+  margin-bottom: 5px;
+}
+
+.highlight .stat-number {
+  color: var(--ios-orange);
+}
+
+.stat-label {
+  font-size: 13px;
+  color: var(--ios-text-secondary);
+}
+
+/* 管理功能区域 */
+.management-section {
+  margin: 20px 15px;
+  background-color: var(--ios-secondary-background);
+  border-radius: 12px;
+  padding: 15px;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.04);
+}
+
+.management-menu {
+  
+}
+
+.menu-item {
+  background-color: var(--ios-tertiary-background);
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 15px;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.menu-item:active {
+  transform: scale(0.98);
+  opacity: 0.9;
+}
+
+.menu-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.user-icon {
+  background-color: #e9f5ff;
+  position: relative;
+}
+
+.user-icon:before {
+  content: "👤";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 20px;
+}
+
+.reservation-icon {
+  background-color: #f0ebff;
+  position: relative;
+}
+
+.reservation-icon:before {
+  content: "📅";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 20px;
+}
+
+.checkin-icon {
+  background-color: #e6f9ee;
+  position: relative;
+}
+
+.checkin-icon:before {
+  content: "✅";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 20px;
+}
+
+.analytics-icon {
+  background-color: #fff2e9;
+  position: relative;
+}
+
+.analytics-icon:before {
+  content: "📊";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 20px;
+}
+
+.settings-icon {
+  background-color: #edf2fc;
+  position: relative;
+}
+
+.settings-icon:before {
+  content: "⚙️";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 20px;
+}
+
+.menu-label {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--ios-text-primary);
+  margin-bottom: 5px;
+}
+
+.menu-desc {
+  font-size: 13px;
+  color: var(--ios-text-tertiary);
+} 
